@@ -8,6 +8,7 @@
 
 #import "MSSLinesController.h"
 #import "MSSRunningLine.h"
+#import <ScreenSaver/ScreenSaverView.h>
 
 //TODO(vsapsai): support 2 kinds of running lines: one where all text moves and one where only focus moves.
 
@@ -23,13 +24,11 @@
     NSParameterAssert(nil != view);
     [self _prepareView:view];
     //TODO(vsapsai): create lines
-    CGFloat viewHeight = view.bounds.size.height;
-    MSSRunningLine *line1 = [[MSSRunningLine alloc] initWithString:@"LINE" fontSize:16.0 height:viewHeight color:[NSColor greenColor]];
-    line1.speed = 20.0;
-    [self addLayer:[line1 rootLayer] atOrigin:CGPointMake(50.0, 0.0)];
-    MSSRunningLine *line2 = [[MSSRunningLine alloc] initWithString:@"SAFHWEFSLKDF" fontSize:22.0 height:viewHeight color:[NSColor greenColor]];
-    line2.speed = 30.0;
-    [self addLayer:[line2 rootLayer] atOrigin:CGPointMake(123.0, 0.0)];
+    srandomdev();
+    MSSRunningLine *line1 = [self _generateRunningLine];
+    [self _addLayer:[line1 rootLayer] atOrigin:CGPointMake(50.0, 0.0)];
+    MSSRunningLine *line2 = [self _generateRunningLine];
+    [self _addLayer:[line2 rootLayer] atOrigin:CGPointMake(123.0, 0.0)];
     self.lines = @[line1, line2];
 }
 
@@ -56,7 +55,7 @@
     }
 }
 
-- (void)addLayer:(CALayer *)layer atOrigin:(CGPoint)origin
+- (void)_addLayer:(CALayer *)layer atOrigin:(CGPoint)origin
 {
     NSParameterAssert(nil != layer);
     CGSize boundsSize = layer.bounds.size;
@@ -65,6 +64,30 @@
                                       origin.y + boundsSize.height * anchorPoint.y);
     layer.position = newPosition;
     [self.hostLayer addSublayer:layer];
+}
+
+- (MSSRunningLine *)_generateRunningLine
+{
+    CGFloat layerHeight = self.hostLayer.bounds.size.height;
+    NSString *string = [self _generateString];
+    CGFloat fontSize = SSRandomIntBetween(12, 42);
+    MSSRunningLine *result = [[MSSRunningLine alloc] initWithString:string fontSize:fontSize height:layerHeight color:[NSColor greenColor]];
+    result.speed = SSRandomFloatBetween(10.0, 100.0);
+    return result;
+}
+
+- (NSString *)_generateString
+{
+    static NSString *sAllowedCharacters = @"ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    NSUInteger allowedCharactersCount = [sAllowedCharacters length];
+    NSUInteger stringLength = SSRandomIntBetween(3, 15);
+    NSMutableArray *characters = [NSMutableArray arrayWithCapacity:stringLength];
+    for (int i = 0; i < stringLength; i++)
+    {
+        NSUInteger characterIndex = SSRandomIntBetween(0, (int)allowedCharactersCount - 1);
+        [characters addObject:[sAllowedCharacters substringWithRange:NSMakeRange(characterIndex, 1)]];
+    }
+    return [characters componentsJoinedByString:@""];
 }
 
 - (void)animateLines:(NSTimeInterval)passedTime
