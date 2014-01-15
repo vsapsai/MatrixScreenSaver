@@ -12,9 +12,12 @@
 
 //TODO(vsapsai): support 2 kinds of running lines: one where all text moves and one where only focus moves.
 
+static const CGFloat kLinesDensity = 0.05;
+
 @interface MSSLinesController()
 @property (nonatomic) CALayer *hostLayer;
 @property (nonatomic) NSArray *lines;
+@property (nonatomic) NSUInteger desiredLinesCount;
 @end
 
 @implementation MSSLinesController
@@ -23,13 +26,14 @@
 {
     NSParameterAssert(nil != view);
     [self _prepareView:view];
-    //TODO(vsapsai): create lines
     srandomdev();
-    MSSRunningLine *line1 = [self _generateRunningLine];
-    [self _addLayer:[line1 rootLayer] atOrigin:CGPointMake(50.0, 0.0)];
-    MSSRunningLine *line2 = [self _generateRunningLine];
-    [self _addLayer:[line2 rootLayer] atOrigin:CGPointMake(123.0, 0.0)];
-    self.lines = @[line1, line2];
+    NSInteger linesCount = view.bounds.size.width * kLinesDensity;
+    if (linesCount < 1)
+    {
+        linesCount = 1;
+    }
+    self.desiredLinesCount = linesCount;
+    // Desired number of lines will be created when we try to animate them.
 }
 
 - (void)_prepareView:(NSView *)view
@@ -97,6 +101,13 @@
     {
         [line updateLinePosition:passedTime];
     }
+    [self _removeFinishedLines];
+    [self _addLinesToDesiredCount];
+}
+
+- (void)_removeFinishedLines
+{
+    NSArray *lines = self.lines;
     NSMutableArray *liveLines = [NSMutableArray arrayWithCapacity:[lines count]];
     for (MSSRunningLine *line in lines)
     {
@@ -110,6 +121,22 @@
         }
     }
     self.lines = [liveLines copy];
+}
+
+- (void)_addLinesToDesiredCount
+{
+    if ([self.lines count] < self.desiredLinesCount)
+    {
+        NSMutableArray *lines = [self.lines mutableCopy];
+        while ([lines count] < self.desiredLinesCount)
+        {
+            MSSRunningLine *line = [self _generateRunningLine];
+            CGFloat xPosition = SSRandomIntBetween(0, self.hostLayer.bounds.size.width);
+            [self _addLayer:[line rootLayer] atOrigin:CGPointMake(xPosition, 0.0)];
+            [lines addObject:line];
+        }
+        self.lines = [lines copy];
+    }
 }
 
 @end
