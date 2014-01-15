@@ -6,9 +6,7 @@
 //  Copyright (c) 2014 Volodymyr Sapsai. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "MSSBaseLinesController.h"
 
-@interface MSSLinesController : NSObject
-- (void)setupViewForDisplayingLines:(NSView *)view;
-- (void)animateLines:(NSTimeInterval)passedTime;
+@interface MSSLinesController : MSSBaseLinesController
 @end

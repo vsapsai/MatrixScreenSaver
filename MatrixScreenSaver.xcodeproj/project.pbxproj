@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F774134C188712F000091CC2 /* MSSBaseLinesController.m in Sources */ = {isa = PBXBuildFile; fileRef = F774134A188712F000091CC2 /* MSSBaseLinesController.m */; };
+		F774134D188712F000091CC2 /* MSSBaseLinesController.m in Sources */ = {isa = PBXBuildFile; fileRef = F774134A188712F000091CC2 /* MSSBaseLinesController.m */; };
 		F7F5131F1885D4B400F4CE91 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7F5131E1885D4B400F4CE91 /* Cocoa.framework */; };
 		F7F513211885D4B400F4CE91 /* ScreenSaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7F513201885D4B400F4CE91 /* ScreenSaver.framework */; };
 		F7F5132B1885D4B400F4CE91 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F7F513291885D4B400F4CE91 /* InfoPlist.strings */; };
@@ -30,6 +32,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F7741349188712F000091CC2 /* MSSBaseLinesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSSBaseLinesController.h; sourceTree = "<group>"; };
+		F774134A188712F000091CC2 /* MSSBaseLinesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSSBaseLinesController.m; sourceTree = "<group>"; };
 		F7F5131B1885D4B400F4CE91 /* MatrixScreenSaver.saver */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MatrixScreenSaver.saver; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7F5131E1885D4B400F4CE91 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		F7F513201885D4B400F4CE91 /* ScreenSaver.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScreenSaver.framework; path = System/Library/Frameworks/ScreenSaver.framework; sourceTree = SDKROOT; };
@@ -132,6 +136,8 @@
 			children = (
 				F7F5132D1885D4B400F4CE91 /* MSSScreenSaverView.h */,
 				F7F5132E1885D4B400F4CE91 /* MSSScreenSaverView.m */,
+				F7741349188712F000091CC2 /* MSSBaseLinesController.h */,
+				F774134A188712F000091CC2 /* MSSBaseLinesController.m */,
 				F7F513721885DF9D00F4CE91 /* MSSLinesController.h */,
 				F7F513731885DF9D00F4CE91 /* MSSLinesController.m */,
 				F7F513741885DF9D00F4CE91 /* MSSRunningLine.h */,
@@ -311,6 +317,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F774134C188712F000091CC2 /* MSSBaseLinesController.m in Sources */,
 				F7F5132F1885D4B400F4CE91 /* MSSScreenSaverView.m in Sources */,
 				F7F5137A1885DF9D00F4CE91 /* MSSRunningLine.m in Sources */,
 				F7F513771885DF9D00F4CE91 /* MSSLinesController.m in Sources */,
@@ -321,6 +328,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F774134D188712F000091CC2 /* MSSBaseLinesController.m in Sources */,
 				F7F513491885D85700F4CE91 /* AppDelegate.m in Sources */,
 				F7F513781885DF9D00F4CE91 /* MSSLinesController.m in Sources */,
 				F7F5136E1885DC2000F4CE91 /* LayerDrawingView.m in Sources */,
@@ -516,6 +524,7 @@
 				F7F513341885D4B400F4CE91 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F7F513611885D85800F4CE91 /* Build configuration list for PBXNativeTarget "TestApp" */ = {
 			isa = XCConfigurationList;
@@ -524,6 +533,7 @@
 				F7F513631885D85800F4CE91 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -11,12 +11,18 @@
 #import <ScreenSaver/ScreenSaverView.h>
 
 //TODO(vsapsai): support 2 kinds of running lines: one where all text moves and one where only focus moves.
+//
+// One of the variants:
+// - all text of the same size, all screen can be taken by characters
+// - lines are pretty long
+// - no easily readable characters
+// - characters don't move, only focus moves (looks like partially visible characters are impossible)
+// - some characters inside a string can suddenly change
 
 static const CGFloat kLinesDensity = 0.05;
 
 @interface MSSLinesController()
-@property (nonatomic) CALayer *hostLayer;
-@property (nonatomic) NSArray *lines;
+@property (nonatomic) CGSize viewSize;
 @property (nonatomic) NSUInteger desiredLinesCount;
 @end
 
@@ -24,8 +30,8 @@ static const CGFloat kLinesDensity = 0.05;
 
 - (void)setupViewForDisplayingLines:(NSView *)view
 {
-    NSParameterAssert(nil != view);
-    [self _prepareView:view];
+    [super setupViewForDisplayingLines:view];
+    self.viewSize = view.bounds.size;
     srandomdev();
     NSInteger linesCount = view.bounds.size.width * kLinesDensity;
     if (linesCount < 1)
@@ -36,43 +42,25 @@ static const CGFloat kLinesDensity = 0.05;
     // Desired number of lines will be created when we try to animate them.
 }
 
-- (void)_prepareView:(NSView *)view
+- (void)generateMoreLinesIfNeeded
 {
-    NSParameterAssert(nil != view);
-    view.wantsLayer = YES;
-    view.layer = [CALayer layer];
-    view.layerContentsRedrawPolicy = NSViewLayerContentsRedrawOnSetNeedsDisplay;
-    view.layerUsesCoreImageFilters = YES;
-    // Make sure we use flipped geometry.  Lines start running from the top, so
-    // it is more convenient to have 0 at the top.
-    if (![view isFlipped])
+    if ([self.lines count] < self.desiredLinesCount)
     {
-        CALayer *hostLayer = [CALayer layer];
-        hostLayer.frame = view.layer.bounds;
-        hostLayer.geometryFlipped = YES;
-        [view.layer addSublayer:hostLayer];
-        self.hostLayer = hostLayer;
+        NSMutableArray *lines = [self.lines mutableCopy];
+        while ([lines count] < self.desiredLinesCount)
+        {
+            MSSRunningLine *line = [self _generateRunningLine];
+            CGFloat xPosition = SSRandomIntBetween(0, self.viewSize.width);
+            [self addLayer:[line rootLayer] atOrigin:CGPointMake(xPosition, 0.0)];
+            [lines addObject:line];
+        }
+        self.lines = [lines copy];
     }
-    else
-    {
-        self.hostLayer = view.layer;
-    }
-}
-
-- (void)_addLayer:(CALayer *)layer atOrigin:(CGPoint)origin
-{
-    NSParameterAssert(nil != layer);
-    CGSize boundsSize = layer.bounds.size;
-    CGPoint anchorPoint = layer.anchorPoint;
-    CGPoint newPosition = CGPointMake(origin.x + boundsSize.width * anchorPoint.x,
-                                      origin.y + boundsSize.height * anchorPoint.y);
-    layer.position = newPosition;
-    [self.hostLayer addSublayer:layer];
 }
 
 - (MSSRunningLine *)_generateRunningLine
 {
-    CGFloat layerHeight = self.hostLayer.bounds.size.height;
+    CGFloat layerHeight = self.viewSize.height;
     NSString *string = [self _generateString];
     CGFloat fontSize = SSRandomIntBetween(12, 42);
     MSSRunningLine *result = [[MSSRunningLine alloc] initWithString:string fontSize:fontSize height:layerHeight color:[NSColor greenColor]];
@@ -92,51 +80,6 @@ static const CGFloat kLinesDensity = 0.05;
         [characters addObject:[sAllowedCharacters substringWithRange:NSMakeRange(characterIndex, 1)]];
     }
     return [characters componentsJoinedByString:@""];
-}
-
-- (void)animateLines:(NSTimeInterval)passedTime
-{
-    NSArray *lines = self.lines;
-    for (MSSRunningLine *line in lines)
-    {
-        [line updateLinePosition:passedTime];
-    }
-    [self _removeFinishedLines];
-    [self _addLinesToDesiredCount];
-}
-
-- (void)_removeFinishedLines
-{
-    NSArray *lines = self.lines;
-    NSMutableArray *liveLines = [NSMutableArray arrayWithCapacity:[lines count]];
-    for (MSSRunningLine *line in lines)
-    {
-        if (line.finished)
-        {
-            [[line rootLayer] removeFromSuperlayer];
-        }
-        else
-        {
-            [liveLines addObject:line];
-        }
-    }
-    self.lines = [liveLines copy];
-}
-
-- (void)_addLinesToDesiredCount
-{
-    if ([self.lines count] < self.desiredLinesCount)
-    {
-        NSMutableArray *lines = [self.lines mutableCopy];
-        while ([lines count] < self.desiredLinesCount)
-        {
-            MSSRunningLine *line = [self _generateRunningLine];
-            CGFloat xPosition = SSRandomIntBetween(0, self.hostLayer.bounds.size.width);
-            [self _addLayer:[line rootLayer] atOrigin:CGPointMake(xPosition, 0.0)];
-            [lines addObject:line];
-        }
-        self.lines = [lines copy];
-    }
 }
 
 @end
