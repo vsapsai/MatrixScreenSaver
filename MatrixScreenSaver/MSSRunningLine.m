@@ -61,9 +61,9 @@
 
         CAGradientLayer *gradientLayer = [CAGradientLayer layer];
         gradientLayer.frame = textLayer.bounds;
-        CGColorRef startColor = CGColorCreateGenericRGB(1.0, 0.5, 0.4, 0.0);
-        CGColorRef endColor = CGColorCreateGenericRGB(0.0, 1.0, 0.0, 1.0);
-        gradientLayer.colors = @[(id)CFBridgingRelease(startColor), (id)CFBridgingRelease(endColor)];
+        CGColorRef startColor = CGColorCreateGenericRGB(0.0, 0.0, 0.0, 0.0);
+        CGColorRef endColor = [self.color CGColor];
+        gradientLayer.colors = @[(id)CFBridgingRelease(startColor), (__bridge id)endColor];
         gradientLayer.startPoint = CGPointMake(0.0, 0.5);
         gradientLayer.endPoint = CGPointMake(1.0, 0.5);
         CIFilter *filter = [CIFilter filterWithName:@"CISourceInCompositing"];
