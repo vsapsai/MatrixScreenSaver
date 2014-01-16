@@ -8,6 +8,7 @@
 
 #import "MSSBaseLinesController.h"
 #import "MSSRunningLine.h"
+#import <QuartzCore/CATransaction.h>
 #import <ScreenSaver/ScreenSaverView.h>
 
 @interface MSSBaseLinesController()
@@ -49,11 +50,15 @@
 
 - (void)animateLines:(NSTimeInterval)passedTime
 {
+    [CATransaction begin];
+    [CATransaction setDisableActions:YES];
     NSArray *lines = self.lines;
     for (MSSRunningLine *line in lines)
     {
         [line updateLinePosition:passedTime];
     }
+    [CATransaction commit];
+
     [self _removeFinishedLines];
     [self generateMoreLinesIfNeeded];
 }
