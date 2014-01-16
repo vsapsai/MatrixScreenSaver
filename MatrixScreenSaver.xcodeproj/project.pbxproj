@@ -13,6 +13,8 @@
 		F77413521887193500091CC2 /* MSSUniformLinesController.m in Sources */ = {isa = PBXBuildFile; fileRef = F774134F1887193500091CC2 /* MSSUniformLinesController.m */; };
 		F7D5A4CE18882F96006D14F6 /* MSSRunningFocusLine.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D5A4CC18882F96006D14F6 /* MSSRunningFocusLine.m */; };
 		F7D5A4CF18882F96006D14F6 /* MSSRunningFocusLine.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D5A4CC18882F96006D14F6 /* MSSRunningFocusLine.m */; };
+		F7D5A4D518885346006D14F6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F7D5A4D318885346006D14F6 /* Localizable.strings */; };
+		F7D5A4D618885346006D14F6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F7D5A4D318885346006D14F6 /* Localizable.strings */; };
 		F7F5131F1885D4B400F4CE91 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7F5131E1885D4B400F4CE91 /* Cocoa.framework */; };
 		F7F513211885D4B400F4CE91 /* ScreenSaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7F513201885D4B400F4CE91 /* ScreenSaver.framework */; };
 		F7F5132B1885D4B400F4CE91 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F7F513291885D4B400F4CE91 /* InfoPlist.strings */; };
@@ -42,6 +44,7 @@
 		F774134F1887193500091CC2 /* MSSUniformLinesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSSUniformLinesController.m; sourceTree = "<group>"; };
 		F7D5A4CB18882F96006D14F6 /* MSSRunningFocusLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSSRunningFocusLine.h; sourceTree = "<group>"; };
 		F7D5A4CC18882F96006D14F6 /* MSSRunningFocusLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSSRunningFocusLine.m; sourceTree = "<group>"; };
+		F7D5A4D418885346006D14F6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Resources/en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F7F01D9818882CD700D554CC /* MSSRunningLine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MSSRunningLine.h; sourceTree = "<group>"; };
 		F7F5131B1885D4B400F4CE91 /* MatrixScreenSaver.saver */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MatrixScreenSaver.saver; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7F5131E1885D4B400F4CE91 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -213,6 +216,7 @@
 			children = (
 				F7F513281885D4B400F4CE91 /* MatrixScreenSaver-Info.plist */,
 				F7F513291885D4B400F4CE91 /* InfoPlist.strings */,
+				F7D5A4D318885346006D14F6 /* Localizable.strings */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -300,6 +304,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F7F5132B1885D4B400F4CE91 /* InfoPlist.strings in Resources */,
+				F7D5A4D518885346006D14F6 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,6 +312,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F7D5A4D618885346006D14F6 /* Localizable.strings in Resources */,
 				F7F513401885D85700F4CE91 /* InfoPlist.strings in Resources */,
 				F7F5134E1885D85700F4CE91 /* Images.xcassets in Resources */,
 				F7F513461885D85700F4CE91 /* Credits.rtf in Resources */,
@@ -360,6 +366,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		F7D5A4D318885346006D14F6 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F7D5A4D418885346006D14F6 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		F7F513291885D4B400F4CE91 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
