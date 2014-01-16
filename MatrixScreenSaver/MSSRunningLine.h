@@ -12,6 +12,7 @@
 @interface MSSRunningLine : NSObject
 - (instancetype)initWithString:(NSString *)string fontSize:(CGFloat)fontSize height:(CGFloat)height color:(NSColor *)color;
 
+@property (nonatomic) id identifier;
 - (CALayer *)rootLayer;
 
 // Animation-related.

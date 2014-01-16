@@ -11,18 +11,10 @@
 #import <ScreenSaver/ScreenSaverView.h>
 
 //TODO(vsapsai): support 2 kinds of running lines: one where all text moves and one where only focus moves.
-//
-// One of the variants:
-// - all text of the same size, all screen can be taken by characters
-// - lines are pretty long
-// - no easily readable characters
-// - characters don't move, only focus moves (looks like partially visible characters are impossible)
-// - some characters inside a string can suddenly change
 
 static const CGFloat kLinesDensity = 0.05;
 
 @interface MSSLinesController()
-@property (nonatomic) CGSize viewSize;
 @property (nonatomic) NSUInteger desiredLinesCount;
 @end
 
@@ -31,8 +23,6 @@ static const CGFloat kLinesDensity = 0.05;
 - (void)setupViewForDisplayingLines:(NSView *)view
 {
     [super setupViewForDisplayingLines:view];
-    self.viewSize = view.bounds.size;
-    srandomdev();
     NSInteger linesCount = view.bounds.size.width * kLinesDensity;
     if (linesCount < 1)
     {
@@ -60,10 +50,9 @@ static const CGFloat kLinesDensity = 0.05;
 
 - (MSSRunningLine *)_generateRunningLine
 {
-    CGFloat layerHeight = self.viewSize.height;
     NSString *string = [self _generateString];
     CGFloat fontSize = SSRandomIntBetween(12, 42);
-    MSSRunningLine *result = [[MSSRunningLine alloc] initWithString:string fontSize:fontSize height:layerHeight color:[NSColor greenColor]];
+    MSSRunningLine *result = [[MSSRunningLine alloc] initWithString:string fontSize:fontSize height:self.viewSize.height color:[NSColor greenColor]];
     result.speed = SSRandomFloatBetween(10.0, 100.0);
     return result;
 }
@@ -71,15 +60,8 @@ static const CGFloat kLinesDensity = 0.05;
 - (NSString *)_generateString
 {
     static NSString *sAllowedCharacters = @"ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    NSUInteger allowedCharactersCount = [sAllowedCharacters length];
     NSUInteger stringLength = SSRandomIntBetween(3, 15);
-    NSMutableArray *characters = [NSMutableArray arrayWithCapacity:stringLength];
-    for (int i = 0; i < stringLength; i++)
-    {
-        NSUInteger characterIndex = SSRandomIntBetween(0, (int)allowedCharactersCount - 1);
-        [characters addObject:[sAllowedCharacters substringWithRange:NSMakeRange(characterIndex, 1)]];
-    }
-    return [characters componentsJoinedByString:@""];
+    return [self randomStringOfLength:stringLength fromCharacters:sAllowedCharacters];
 }
 
 @end

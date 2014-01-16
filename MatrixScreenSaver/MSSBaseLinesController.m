@@ -8,6 +8,7 @@
 
 #import "MSSBaseLinesController.h"
 #import "MSSRunningLine.h"
+#import <ScreenSaver/ScreenSaverView.h>
 
 @interface MSSBaseLinesController()
 @property (nonatomic) CALayer *hostLayer;
@@ -19,6 +20,8 @@
 {
     NSParameterAssert(nil != view);
     [self _prepareView:view];
+    self.viewSize = view.bounds.size;
+    srandomdev();
 }
 
 - (void)_prepareView:(NSView *)view
@@ -63,6 +66,7 @@
     {
         if (line.finished)
         {
+            [self willRemoveLine:line];
             [[line rootLayer] removeFromSuperlayer];
         }
         else
@@ -71,11 +75,6 @@
         }
     }
     self.lines = [liveLines copy];
-}
-
-- (void)generateMoreLinesIfNeeded
-{
-    NSAssert(@"Should implement %@ in subclasses", NSStringFromSelector(_cmd));
 }
 
 - (void)addLayer:(CALayer *)layer atOrigin:(CGPoint)origin
@@ -87,6 +86,33 @@
                                       origin.y + boundsSize.height * anchorPoint.y);
     layer.position = newPosition;
     [self.hostLayer addSublayer:layer];
+}
+
+- (NSString *)randomStringOfLength:(NSUInteger)length fromCharacters:(NSString *)characters
+{
+    if (0 == length)
+    {
+        return @"";
+    }
+    NSParameterAssert([characters length] > 0);
+    int lastCharacterIndex = (int)[characters length] - 1;
+    NSMutableArray *resultCharacters = [NSMutableArray arrayWithCapacity:length];
+    for (NSInteger i = 0; i < length; i++)
+    {
+        NSUInteger characterIndex = SSRandomIntBetween(0, lastCharacterIndex);
+        [resultCharacters addObject:[characters substringWithRange:NSMakeRange(characterIndex, 1)]];
+    }
+    return [resultCharacters componentsJoinedByString:@""];
+}
+
+- (void)generateMoreLinesIfNeeded
+{
+    NSAssert(@"Should implement %@ in subclasses", NSStringFromSelector(_cmd));
+}
+
+- (void)willRemoveLine:(MSSRunningLine *)line
+{
+    // Can be implemented in subclasses.
 }
 
 @end

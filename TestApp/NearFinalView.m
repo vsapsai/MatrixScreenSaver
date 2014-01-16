@@ -8,9 +8,10 @@
 
 #import "NearFinalView.h"
 #import "MSSLinesController.h"
+#import "MSSUniformLinesController.h"
 
 @interface NearFinalView()
-@property (nonatomic) MSSLinesController *linesController;
+@property (nonatomic) MSSBaseLinesController *linesController;
 @property (nonatomic) NSTimer *animationTimer;
 @property (nonatomic) NSDate *lastAnimationDate;
 @end
@@ -22,7 +23,7 @@
     self = [super initWithFrame:frame];
     if (nil != self)
     {
-        self.linesController = [[MSSLinesController alloc] init];
+        self.linesController = [[MSSUniformLinesController alloc] init];
         [self.linesController setupViewForDisplayingLines:self];
 
         self.layer.backgroundColor = [[NSColor blackColor] CGColor];
