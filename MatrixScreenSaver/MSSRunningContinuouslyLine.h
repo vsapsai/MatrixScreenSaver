@@ -1,5 +1,5 @@
 //
-//  MSSRunningLine.h
+//  MSSRunningContinuouslyLine.h
 //  MatrixScreenSaver
 //
 //  Created by Volodymyr Sapsai on 1/14/14.
@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface MSSRunningLine : NSObject
+@interface MSSRunningContinuouslyLine : NSObject
 - (instancetype)initWithString:(NSString *)string fontSize:(CGFloat)fontSize height:(CGFloat)height color:(NSColor *)color;
 
 @property (nonatomic) id identifier;

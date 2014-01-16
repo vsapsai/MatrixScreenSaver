@@ -1,18 +1,18 @@
 //
-//  MSSRunningLine.m
+//  MSSRunningContinuouslyLine.m
 //  MatrixScreenSaver
 //
 //  Created by Volodymyr Sapsai on 1/14/14.
 //  Copyright (c) 2014 Volodymyr Sapsai. All rights reserved.
 //
 
-#import "MSSRunningLine.h"
+#import "MSSRunningContinuouslyLine.h"
 
 #import <QuartzCore/CAGradientLayer.h>
 #import <QuartzCore/CATextLayer.h>
 #import <QuartzCore/CIFilter.h>
 
-@interface MSSRunningLine()
+@interface MSSRunningContinuouslyLine()
 @property (copy, nonatomic) NSString *string;
 @property (nonatomic) CGFloat fontSize;
 @property (nonatomic) CGFloat height;
@@ -22,7 +22,7 @@
 @property (nonatomic) CALayer *textLayer;
 @end
 
-@implementation MSSRunningLine
+@implementation MSSRunningContinuouslyLine
 
 - (instancetype)initWithString:(NSString *)string fontSize:(CGFloat)fontSize height:(CGFloat)height color:(NSColor *)color
 {
