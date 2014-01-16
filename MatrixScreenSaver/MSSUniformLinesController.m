@@ -81,7 +81,7 @@ static const CGFloat kLinesPercentage = 0.9;
     static NSColor *sHilightColor = nil;
     if (!sIsInitialized)
     {
-        sAllowedCharacters = [[NSBundle mainBundle] localizedStringForKey:@"Fancy Characters" value:@"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ" table:nil];
+        sAllowedCharacters = [[NSBundle bundleForClass:[MSSUniformLinesController class]] localizedStringForKey:@"Fancy Characters" value:@"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ" table:nil];
         sColor = [NSColor colorWithCalibratedRed:(16.0 / 255.0) green:(117.0 / 255.0) blue:(2.0 / 255.0) alpha:1.0];
         sHilightColor = [NSColor colorWithCalibratedRed:(150.0 / 255.0) green:(255.0 / 255.0) blue:(134.0 / 255.0) alpha:1.0];
         sIsInitialized = YES;
