@@ -72,7 +72,7 @@
         self.gradientLayer = gradientLayer;
 
         CALayer *rootLayer = [CALayer layer];
-        rootLayer.frame = textLayer.bounds;
+        rootLayer.frame = CGRectMake(0.0, 0.0, textSize.height, textSize.width);
         [rootLayer addSublayer:textLayer];
         self.rootLayerPrimitive = rootLayer;
     }
