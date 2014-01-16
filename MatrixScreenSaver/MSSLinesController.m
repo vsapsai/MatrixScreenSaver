@@ -10,8 +10,6 @@
 #import "MSSRunningContinuouslyLine.h"
 #import <ScreenSaver/ScreenSaverView.h>
 
-//TODO(vsapsai): support 2 kinds of running lines: one where all text moves and one where only focus moves.
-
 static const CGFloat kLinesDensity = 0.05;
 
 @interface MSSLinesController()

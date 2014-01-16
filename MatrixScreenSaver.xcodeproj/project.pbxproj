@@ -11,6 +11,8 @@
 		F774134D188712F000091CC2 /* MSSBaseLinesController.m in Sources */ = {isa = PBXBuildFile; fileRef = F774134A188712F000091CC2 /* MSSBaseLinesController.m */; };
 		F77413511887193500091CC2 /* MSSUniformLinesController.m in Sources */ = {isa = PBXBuildFile; fileRef = F774134F1887193500091CC2 /* MSSUniformLinesController.m */; };
 		F77413521887193500091CC2 /* MSSUniformLinesController.m in Sources */ = {isa = PBXBuildFile; fileRef = F774134F1887193500091CC2 /* MSSUniformLinesController.m */; };
+		F7D5A4CE18882F96006D14F6 /* MSSRunningFocusLine.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D5A4CC18882F96006D14F6 /* MSSRunningFocusLine.m */; };
+		F7D5A4CF18882F96006D14F6 /* MSSRunningFocusLine.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D5A4CC18882F96006D14F6 /* MSSRunningFocusLine.m */; };
 		F7F5131F1885D4B400F4CE91 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7F5131E1885D4B400F4CE91 /* Cocoa.framework */; };
 		F7F513211885D4B400F4CE91 /* ScreenSaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7F513201885D4B400F4CE91 /* ScreenSaver.framework */; };
 		F7F5132B1885D4B400F4CE91 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F7F513291885D4B400F4CE91 /* InfoPlist.strings */; };
@@ -38,6 +40,8 @@
 		F774134A188712F000091CC2 /* MSSBaseLinesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSSBaseLinesController.m; sourceTree = "<group>"; };
 		F774134E1887193500091CC2 /* MSSUniformLinesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSSUniformLinesController.h; sourceTree = "<group>"; };
 		F774134F1887193500091CC2 /* MSSUniformLinesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSSUniformLinesController.m; sourceTree = "<group>"; };
+		F7D5A4CB18882F96006D14F6 /* MSSRunningFocusLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSSRunningFocusLine.h; sourceTree = "<group>"; };
+		F7D5A4CC18882F96006D14F6 /* MSSRunningFocusLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSSRunningFocusLine.m; sourceTree = "<group>"; };
 		F7F01D9818882CD700D554CC /* MSSRunningLine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MSSRunningLine.h; sourceTree = "<group>"; };
 		F7F5131B1885D4B400F4CE91 /* MatrixScreenSaver.saver */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MatrixScreenSaver.saver; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7F5131E1885D4B400F4CE91 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -150,6 +154,8 @@
 				F7F01D9818882CD700D554CC /* MSSRunningLine.h */,
 				F7F513741885DF9D00F4CE91 /* MSSRunningContinuouslyLine.h */,
 				F7F513751885DF9D00F4CE91 /* MSSRunningContinuouslyLine.m */,
+				F7D5A4CB18882F96006D14F6 /* MSSRunningFocusLine.h */,
+				F7D5A4CC18882F96006D14F6 /* MSSRunningFocusLine.m */,
 				F7F513681885DB6800F4CE91 /* Resources */,
 				F7F513271885D4B400F4CE91 /* Supporting Files */,
 			);
@@ -325,6 +331,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F7D5A4CE18882F96006D14F6 /* MSSRunningFocusLine.m in Sources */,
 				F77413511887193500091CC2 /* MSSUniformLinesController.m in Sources */,
 				F774134C188712F000091CC2 /* MSSBaseLinesController.m in Sources */,
 				F7F5132F1885D4B400F4CE91 /* MSSScreenSaverView.m in Sources */,
@@ -345,6 +352,7 @@
 				F7F5136D1885DC2000F4CE91 /* CompositingOperationView.m in Sources */,
 				F7F513421885D85700F4CE91 /* main.m in Sources */,
 				F77413521887193500091CC2 /* MSSUniformLinesController.m in Sources */,
+				F7D5A4CF18882F96006D14F6 /* MSSRunningFocusLine.m in Sources */,
 				F7F513711885DE4300F4CE91 /* NearFinalView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
