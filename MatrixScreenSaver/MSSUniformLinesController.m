@@ -75,16 +75,20 @@ static const CGFloat kLinesPercentage = 0.9;
 
 - (id<MSSRunningLine>)_generateLine
 {
+    static BOOL sIsInitialized = NO;
     static NSString *sAllowedCharacters = @"ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     static NSColor *sColor = nil;
-    if (nil == sColor)
+    static NSColor *sHilightColor = nil;
+    if (!sIsInitialized)
     {
         sColor = [NSColor colorWithCalibratedRed:(16.0 / 255.0) green:(117.0 / 255.0) blue:(2.0 / 255.0) alpha:1.0];
+        sHilightColor = [NSColor colorWithCalibratedRed:(150.0 / 255.0) green:(255.0 / 255.0) blue:(134.0 / 255.0) alpha:1.0];
+        sIsInitialized = YES;
     }
 
     NSString *string = [self randomStringOfLength:self.lineLength fromCharacters:sAllowedCharacters];
     CGFloat focusHeight = kMinCharacterHeight * SSRandomIntBetween(5, (int)self.lineLength);
-    id<MSSRunningLine> line = [[MSSRunningFocusLine alloc] initWithString:string fontSize:kFontSize focusHeight:focusHeight color:sColor hilightColor:[NSColor greenColor] backgroundColor:[NSColor blackColor]];
+    id<MSSRunningLine> line = [[MSSRunningFocusLine alloc] initWithString:string fontSize:kFontSize focusHeight:focusHeight color:sColor hilightColor:sHilightColor backgroundColor:[NSColor blackColor]];
     line.speed = SSRandomFloatBetween(50.0, 80.0);
     return line;
 }
