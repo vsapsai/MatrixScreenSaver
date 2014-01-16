@@ -63,23 +63,35 @@ static const CGFloat kLinesPercentage = 0.9;
         NSMutableArray *addedLines = [NSMutableArray arrayWithCapacity:linesToAdd];
         for (NSUInteger i = 0; i < linesToAdd; i++)
         {
-            MSSRunningLine *line = [[MSSRunningLine alloc] initWithString:[self _generateString] fontSize:kFontSize height:self.viewSize.height color:[NSColor greenColor]];
-            line.speed = SSRandomFloatBetween(50.0, 70.0);
-
-            NSNumber *linePlace = [self _takeRandomObject:self.availablePlaces];
-            line.identifier = linePlace;
-            CGFloat xPosition = self.linesXOffset + [linePlace integerValue] * kLineStep;
-            [self addLayer:[line rootLayer] atOrigin:CGPointMake(xPosition, 0.0)];
+            MSSRunningLine *line = [self _generateLine];
+            [self _positionLineAtRandomPosition:line];
             [addedLines addObject:line];
         }
         self.lines = [self.lines arrayByAddingObjectsFromArray:addedLines];
     }
 }
 
-- (NSString *)_generateString
+- (MSSRunningLine *)_generateLine
 {
     static NSString *sAllowedCharacters = @"ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    return [self randomStringOfLength:self.lineLength fromCharacters:sAllowedCharacters];
+    static NSColor *sColor = nil;
+    if (nil == sColor)
+    {
+        sColor = [NSColor colorWithCalibratedRed:(16.0 / 255.0) green:(117.0 / 255.0) blue:(2.0 / 255.0) alpha:1.0];
+    }
+
+    NSString *string = [self randomStringOfLength:self.lineLength fromCharacters:sAllowedCharacters];
+    MSSRunningLine *line = [[MSSRunningLine alloc] initWithString:string fontSize:kFontSize height:self.viewSize.height color:sColor];
+    line.speed = SSRandomFloatBetween(50.0, 70.0);
+    return line;
+}
+
+- (void)_positionLineAtRandomPosition:(MSSRunningLine *)line
+{
+    NSNumber *linePlace = [self _takeRandomObject:self.availablePlaces];
+    line.identifier = linePlace;
+    CGFloat xPosition = self.linesXOffset + [linePlace integerValue] * kLineStep;
+    [self addLayer:[line rootLayer] atOrigin:CGPointMake(xPosition, 0.0)];
 }
 
 - (id)_takeRandomObject:(NSMutableArray *)objects
