@@ -83,7 +83,8 @@ static const CGFloat kLinesPercentage = 0.9;
     }
 
     NSString *string = [self randomStringOfLength:self.lineLength fromCharacters:sAllowedCharacters];
-    id<MSSRunningLine> line = [[MSSRunningFocusLine alloc] initWithString:string fontSize:kFontSize focusHeight:160.0 color:sColor hilightColor:[NSColor greenColor] backgroundColor:[NSColor blackColor]];
+    CGFloat focusHeight = kMinCharacterHeight * SSRandomIntBetween(5, (int)self.lineLength);
+    id<MSSRunningLine> line = [[MSSRunningFocusLine alloc] initWithString:string fontSize:kFontSize focusHeight:focusHeight color:sColor hilightColor:[NSColor greenColor] backgroundColor:[NSColor blackColor]];
     line.speed = SSRandomFloatBetween(50.0, 80.0);
     return line;
 }
