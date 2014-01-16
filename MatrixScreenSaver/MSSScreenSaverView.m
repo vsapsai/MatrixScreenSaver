@@ -7,6 +7,12 @@
 //
 
 #import "MSSScreenSaverView.h"
+#import "MSSUniformLinesController.h"
+
+@interface MSSScreenSaverView()
+@property (nonatomic) MSSBaseLinesController *linesController;
+@property (nonatomic) NSDate *lastAnimationDate;
+@end
 
 @implementation MSSScreenSaverView
 
@@ -15,6 +21,10 @@
     self = [super initWithFrame:frame isPreview:isPreview];
     if (nil != self)
     {
+        self.linesController = [[MSSUniformLinesController alloc] init];
+        [self.linesController setupViewForDisplayingLines:self];
+        self.layer.backgroundColor = [[NSColor blackColor] CGColor];
+
         [self setAnimationTimeInterval:1/30.0];
     }
     return self;
@@ -23,21 +33,25 @@
 - (void)startAnimation
 {
     [super startAnimation];
+    self.lastAnimationDate = [NSDate date];
 }
 
 - (void)stopAnimation
 {
     [super stopAnimation];
-}
-
-- (void)drawRect:(NSRect)rect
-{
-    [super drawRect:rect];
+    self.lastAnimationDate = nil;
 }
 
 - (void)animateOneFrame
 {
-    return;
+    NSDate *currentDate = [NSDate date];
+    NSDate *lastAnimationDate = self.lastAnimationDate;
+    if (nil != lastAnimationDate)
+    {
+        NSTimeInterval passedTime = [currentDate timeIntervalSinceDate:lastAnimationDate];
+        [self.linesController animateLines:passedTime];
+    }
+    self.lastAnimationDate = currentDate;
 }
 
 - (BOOL)hasConfigureSheet
