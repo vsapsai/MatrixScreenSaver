@@ -38,6 +38,7 @@
 		F774134A188712F000091CC2 /* MSSBaseLinesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSSBaseLinesController.m; sourceTree = "<group>"; };
 		F774134E1887193500091CC2 /* MSSUniformLinesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSSUniformLinesController.h; sourceTree = "<group>"; };
 		F774134F1887193500091CC2 /* MSSUniformLinesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSSUniformLinesController.m; sourceTree = "<group>"; };
+		F7F01D9818882CD700D554CC /* MSSRunningLine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MSSRunningLine.h; sourceTree = "<group>"; };
 		F7F5131B1885D4B400F4CE91 /* MatrixScreenSaver.saver */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MatrixScreenSaver.saver; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7F5131E1885D4B400F4CE91 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		F7F513201885D4B400F4CE91 /* ScreenSaver.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScreenSaver.framework; path = System/Library/Frameworks/ScreenSaver.framework; sourceTree = SDKROOT; };
@@ -146,6 +147,7 @@
 				F7F513731885DF9D00F4CE91 /* MSSLinesController.m */,
 				F774134E1887193500091CC2 /* MSSUniformLinesController.h */,
 				F774134F1887193500091CC2 /* MSSUniformLinesController.m */,
+				F7F01D9818882CD700D554CC /* MSSRunningLine.h */,
 				F7F513741885DF9D00F4CE91 /* MSSRunningContinuouslyLine.h */,
 				F7F513751885DF9D00F4CE91 /* MSSRunningContinuouslyLine.m */,
 				F7F513681885DB6800F4CE91 /* Resources */,

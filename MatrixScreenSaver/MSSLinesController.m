@@ -39,7 +39,7 @@ static const CGFloat kLinesDensity = 0.05;
         NSMutableArray *lines = [self.lines mutableCopy];
         while ([lines count] < self.desiredLinesCount)
         {
-            MSSRunningContinuouslyLine *line = [self _generateRunningLine];
+            id<MSSRunningLine> line = [self _generateRunningLine];
             CGFloat xPosition = SSRandomIntBetween(0, self.viewSize.width);
             [self addLayer:[line rootLayer] atOrigin:CGPointMake(xPosition, 0.0)];
             [lines addObject:line];
@@ -48,11 +48,11 @@ static const CGFloat kLinesDensity = 0.05;
     }
 }
 
-- (MSSRunningContinuouslyLine *)_generateRunningLine
+- (id<MSSRunningLine>)_generateRunningLine
 {
     NSString *string = [self _generateString];
     CGFloat fontSize = SSRandomIntBetween(12, 42);
-    MSSRunningContinuouslyLine *result = [[MSSRunningContinuouslyLine alloc] initWithString:string fontSize:fontSize height:self.viewSize.height color:[NSColor greenColor]];
+    id<MSSRunningLine> result = [[MSSRunningContinuouslyLine alloc] initWithString:string fontSize:fontSize height:self.viewSize.height color:[NSColor greenColor]];
     result.speed = SSRandomFloatBetween(10.0, 100.0);
     return result;
 }

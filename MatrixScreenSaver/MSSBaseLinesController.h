@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class MSSRunningContinuouslyLine;
+@protocol MSSRunningLine;
 
 // `MSSBaseLinesController` is responsible for basic lines' management.  It
 // should be subclassed to provide various lines' patterns.
@@ -23,5 +23,5 @@
 - (NSString *)randomStringOfLength:(NSUInteger)length fromCharacters:(NSString *)characters;
 // Should be overridden in subclasses.
 - (void)generateMoreLinesIfNeeded;
-- (void)willRemoveLine:(MSSRunningContinuouslyLine *)line;
+- (void)willRemoveLine:(id<MSSRunningLine>)line;
 @end

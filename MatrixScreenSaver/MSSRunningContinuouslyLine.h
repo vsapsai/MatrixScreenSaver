@@ -7,16 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MSSRunningLine.h"
 
 
-@interface MSSRunningContinuouslyLine : NSObject
+@interface MSSRunningContinuouslyLine : NSObject <MSSRunningLine>
 - (instancetype)initWithString:(NSString *)string fontSize:(CGFloat)fontSize height:(CGFloat)height color:(NSColor *)color;
-
-@property (nonatomic) id identifier;
-- (CALayer *)rootLayer;
-
-// Animation-related.
-@property (nonatomic) CGFloat speed;
-@property (readonly, nonatomic, getter=isFinished) BOOL finished;
-- (void)updateLinePosition:(NSTimeInterval)passedTime;
 @end

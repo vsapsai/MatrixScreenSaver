@@ -7,7 +7,7 @@
 //
 
 #import "MSSBaseLinesController.h"
-#import "MSSRunningContinuouslyLine.h"
+#import "MSSRunningLine.h"
 #import <QuartzCore/CATransaction.h>
 #import <ScreenSaver/ScreenSaverView.h>
 
@@ -53,7 +53,7 @@
     [CATransaction begin];
     [CATransaction setDisableActions:YES];
     NSArray *lines = self.lines;
-    for (MSSRunningContinuouslyLine *line in lines)
+    for (id<MSSRunningLine> line in lines)
     {
         [line updateLinePosition:passedTime];
     }
@@ -67,7 +67,7 @@
 {
     NSArray *lines = self.lines;
     NSMutableArray *liveLines = [NSMutableArray arrayWithCapacity:[lines count]];
-    for (MSSRunningContinuouslyLine *line in lines)
+    for (id<MSSRunningLine> line in lines)
     {
         if (line.finished)
         {
@@ -115,7 +115,7 @@
     NSAssert(@"Should implement %@ in subclasses", NSStringFromSelector(_cmd));
 }
 
-- (void)willRemoveLine:(MSSRunningContinuouslyLine *)line
+- (void)willRemoveLine:(id<MSSRunningLine>)line
 {
     // Can be implemented in subclasses.
 }

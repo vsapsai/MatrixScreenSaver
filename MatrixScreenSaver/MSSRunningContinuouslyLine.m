@@ -24,6 +24,9 @@
 
 @implementation MSSRunningContinuouslyLine
 
+@synthesize identifier;
+@synthesize speed;
+
 - (instancetype)initWithString:(NSString *)string fontSize:(CGFloat)fontSize height:(CGFloat)height color:(NSColor *)color
 {
     NSParameterAssert(string.length > 0);

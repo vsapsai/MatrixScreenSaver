@@ -65,7 +65,7 @@ static const CGFloat kLinesPercentage = 0.9;
         NSMutableArray *addedLines = [NSMutableArray arrayWithCapacity:linesToAdd];
         for (NSUInteger i = 0; i < linesToAdd; i++)
         {
-            MSSRunningContinuouslyLine *line = [self _generateLine];
+            id<MSSRunningLine> line = [self _generateLine];
             [self _positionLineAtRandomPosition:line];
             [addedLines addObject:line];
         }
@@ -73,7 +73,7 @@ static const CGFloat kLinesPercentage = 0.9;
     }
 }
 
-- (MSSRunningContinuouslyLine *)_generateLine
+- (id<MSSRunningLine>)_generateLine
 {
     static NSString *sAllowedCharacters = @"ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     static NSColor *sColor = nil;
@@ -83,12 +83,12 @@ static const CGFloat kLinesPercentage = 0.9;
     }
 
     NSString *string = [self randomStringOfLength:self.lineLength fromCharacters:sAllowedCharacters];
-    MSSRunningContinuouslyLine *line = [[MSSRunningContinuouslyLine alloc] initWithString:string fontSize:kFontSize height:self.viewSize.height color:sColor];
+    id<MSSRunningLine> line = [[MSSRunningContinuouslyLine alloc] initWithString:string fontSize:kFontSize height:self.viewSize.height color:sColor];
     line.speed = SSRandomFloatBetween(50.0, 80.0);
     return line;
 }
 
-- (void)_positionLineAtRandomPosition:(MSSRunningContinuouslyLine *)line
+- (void)_positionLineAtRandomPosition:(id<MSSRunningLine>)line
 {
     NSNumber *linePlace = [self _takeRandomObject:self.availablePlaces];
     line.identifier = linePlace;
@@ -105,7 +105,7 @@ static const CGFloat kLinesPercentage = 0.9;
     return result;
 }
 
-- (void)willRemoveLine:(MSSRunningContinuouslyLine *)line
+- (void)willRemoveLine:(id<MSSRunningLine>)line
 {
     NSNumber *lineIdentifier = line.identifier;
     NSAssert(nil != lineIdentifier, @"Should have assigned identifier to a line when created it");
