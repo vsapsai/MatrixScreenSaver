@@ -57,9 +57,11 @@ static const CGFloat kLinesPercentage = 0.9;
 
 - (void)generateMoreLinesIfNeeded
 {
-    NSInteger linesToAdd = self.desiredLinesCount - [self.lines count];
-    if (linesToAdd > 0)
+    BOOL needMoreLines = ([self.lines count] < self.desiredLinesCount);
+    BOOL canAddLine = (SSRandomFloatBetween(0.0, 10.0) < 1.0);
+    if (needMoreLines && canAddLine)
     {
+        NSInteger linesToAdd = 1;
         NSMutableArray *addedLines = [NSMutableArray arrayWithCapacity:linesToAdd];
         for (NSUInteger i = 0; i < linesToAdd; i++)
         {
@@ -82,7 +84,7 @@ static const CGFloat kLinesPercentage = 0.9;
 
     NSString *string = [self randomStringOfLength:self.lineLength fromCharacters:sAllowedCharacters];
     MSSRunningLine *line = [[MSSRunningLine alloc] initWithString:string fontSize:kFontSize height:self.viewSize.height color:sColor];
-    line.speed = SSRandomFloatBetween(50.0, 70.0);
+    line.speed = SSRandomFloatBetween(50.0, 80.0);
     return line;
 }
 
