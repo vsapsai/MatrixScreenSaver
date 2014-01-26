@@ -8,6 +8,7 @@
 
 #import "MSSBaseLinesController.h"
 #import "MSSRunningLine.h"
+#import <QuartzCore/CAMediaTimingFunction.h>
 #import <QuartzCore/CATransaction.h>
 #import <ScreenSaver/ScreenSaverView.h>
 
@@ -50,8 +51,14 @@
 
 - (void)animateLines:(NSTimeInterval)passedTime
 {
+    static CAMediaTimingFunction *sTimingFunction = nil;
+    if (nil == sTimingFunction)
+    {
+        sTimingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+    }
     [CATransaction begin];
-    [CATransaction setDisableActions:YES];
+    [CATransaction setAnimationDuration:passedTime];
+    [CATransaction setAnimationTimingFunction:sTimingFunction];
     NSArray *lines = self.lines;
     for (id<MSSRunningLine> line in lines)
     {

@@ -57,11 +57,10 @@ static const CGFloat kLinesPercentage = 0.9;
 
 - (void)generateMoreLinesIfNeeded
 {
-    BOOL needMoreLines = ([self.lines count] < self.desiredLinesCount);
-    BOOL canAddLine = (SSRandomFloatBetween(0.0, 10.0) < 1.0);
-    if (needMoreLines && canAddLine)
+    NSInteger requiredLinesCount = self.desiredLinesCount - [self.lines count];
+    if (requiredLinesCount > 0)
     {
-        NSInteger linesToAdd = 1;
+        NSInteger linesToAdd = SSRandomIntBetween(1, fminf(requiredLinesCount, 3));
         NSMutableArray *addedLines = [NSMutableArray arrayWithCapacity:linesToAdd];
         for (NSUInteger i = 0; i < linesToAdd; i++)
         {
