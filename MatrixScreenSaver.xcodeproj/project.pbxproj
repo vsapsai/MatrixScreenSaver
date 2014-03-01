@@ -11,6 +11,9 @@
 		F774134D188712F000091CC2 /* MSSBaseLinesController.m in Sources */ = {isa = PBXBuildFile; fileRef = F774134A188712F000091CC2 /* MSSBaseLinesController.m */; };
 		F77413511887193500091CC2 /* MSSUniformLinesController.m in Sources */ = {isa = PBXBuildFile; fileRef = F774134F1887193500091CC2 /* MSSUniformLinesController.m */; };
 		F77413521887193500091CC2 /* MSSUniformLinesController.m in Sources */ = {isa = PBXBuildFile; fileRef = F774134F1887193500091CC2 /* MSSUniformLinesController.m */; };
+		F7C7CA8618C24FC9002CBE66 /* MSSRunningDiscreteFocusLine.h in Headers */ = {isa = PBXBuildFile; fileRef = F7C7CA8418C24FC9002CBE66 /* MSSRunningDiscreteFocusLine.h */; };
+		F7C7CA8718C24FC9002CBE66 /* MSSRunningDiscreteFocusLine.m in Sources */ = {isa = PBXBuildFile; fileRef = F7C7CA8518C24FC9002CBE66 /* MSSRunningDiscreteFocusLine.m */; };
+		F7C7CA8818C24FC9002CBE66 /* MSSRunningDiscreteFocusLine.m in Sources */ = {isa = PBXBuildFile; fileRef = F7C7CA8518C24FC9002CBE66 /* MSSRunningDiscreteFocusLine.m */; };
 		F7D5A4CE18882F96006D14F6 /* MSSRunningFocusLine.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D5A4CC18882F96006D14F6 /* MSSRunningFocusLine.m */; };
 		F7D5A4CF18882F96006D14F6 /* MSSRunningFocusLine.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D5A4CC18882F96006D14F6 /* MSSRunningFocusLine.m */; };
 		F7D5A4D518885346006D14F6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F7D5A4D318885346006D14F6 /* Localizable.strings */; };
@@ -42,6 +45,8 @@
 		F774134A188712F000091CC2 /* MSSBaseLinesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSSBaseLinesController.m; sourceTree = "<group>"; };
 		F774134E1887193500091CC2 /* MSSUniformLinesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSSUniformLinesController.h; sourceTree = "<group>"; };
 		F774134F1887193500091CC2 /* MSSUniformLinesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSSUniformLinesController.m; sourceTree = "<group>"; };
+		F7C7CA8418C24FC9002CBE66 /* MSSRunningDiscreteFocusLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSSRunningDiscreteFocusLine.h; sourceTree = "<group>"; };
+		F7C7CA8518C24FC9002CBE66 /* MSSRunningDiscreteFocusLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSSRunningDiscreteFocusLine.m; sourceTree = "<group>"; };
 		F7D5A4CB18882F96006D14F6 /* MSSRunningFocusLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSSRunningFocusLine.h; sourceTree = "<group>"; };
 		F7D5A4CC18882F96006D14F6 /* MSSRunningFocusLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSSRunningFocusLine.m; sourceTree = "<group>"; };
 		F7D5A4D418885346006D14F6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Resources/en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -159,6 +164,8 @@
 				F7F513751885DF9D00F4CE91 /* MSSRunningContinuouslyLine.m */,
 				F7D5A4CB18882F96006D14F6 /* MSSRunningFocusLine.h */,
 				F7D5A4CC18882F96006D14F6 /* MSSRunningFocusLine.m */,
+				F7C7CA8418C24FC9002CBE66 /* MSSRunningDiscreteFocusLine.h */,
+				F7C7CA8518C24FC9002CBE66 /* MSSRunningDiscreteFocusLine.m */,
 				F7F513681885DB6800F4CE91 /* Resources */,
 				F7F513271885D4B400F4CE91 /* Supporting Files */,
 			);
@@ -228,6 +235,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F7C7CA8618C24FC9002CBE66 /* MSSRunningDiscreteFocusLine.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,6 +349,7 @@
 				F77413511887193500091CC2 /* MSSUniformLinesController.m in Sources */,
 				F774134C188712F000091CC2 /* MSSBaseLinesController.m in Sources */,
 				F7F5132F1885D4B400F4CE91 /* MSSScreenSaverView.m in Sources */,
+				F7C7CA8718C24FC9002CBE66 /* MSSRunningDiscreteFocusLine.m in Sources */,
 				F7F5137A1885DF9D00F4CE91 /* MSSRunningContinuouslyLine.m in Sources */,
 				F7F513771885DF9D00F4CE91 /* MSSLinesController.m in Sources */,
 			);
@@ -357,6 +366,7 @@
 				F7F5137B1885DF9D00F4CE91 /* MSSRunningContinuouslyLine.m in Sources */,
 				F7F5136D1885DC2000F4CE91 /* CompositingOperationView.m in Sources */,
 				F7F513421885D85700F4CE91 /* main.m in Sources */,
+				F7C7CA8818C24FC9002CBE66 /* MSSRunningDiscreteFocusLine.m in Sources */,
 				F77413521887193500091CC2 /* MSSUniformLinesController.m in Sources */,
 				F7D5A4CF18882F96006D14F6 /* MSSRunningFocusLine.m in Sources */,
 				F7F513711885DE4300F4CE91 /* NearFinalView.m in Sources */,
