@@ -49,7 +49,7 @@ static CGFloat MSSBlendValue(CGFloat fromValue, CGFloat toValue, CGFloat lambda)
         self.color = color;
         self.hilightColor = hilightColor;
         self.backgroundColor = backgroundColor;
-        self.focusWindowStart = 0.0;
+        self.focusWindowStart = -focusHeight;
 
         CTLineRef line = [self _createLineWithString:string fontSize:fontSize];
         NSAssert(NULL != line, @"Failed to create CTLineRef");
@@ -124,12 +124,15 @@ static CGFloat MSSBlendValue(CGFloat fromValue, CGFloat toValue, CGFloat lambda)
 
 - (BOOL)isFinished
 {
-    return NO;
+    return (self.focusWindowStart >= self.rootLayerPrimitive.bounds.size.height);
 }
 
 - (void)updateLinePosition:(NSTimeInterval)passedTime
 {
-    // do nothing
+    CGFloat movedDistance = passedTime * self.speed;
+    CGFloat newPosition = self.focusWindowStart + movedDistance;
+    self.focusWindowStart = newPosition;
+    [self.rootLayerPrimitive setNeedsDisplay];
 }
 
 - (void)drawLayer:(CALayer *)layer inContext:(CGContextRef)context
@@ -138,7 +141,9 @@ static CGFloat MSSBlendValue(CGFloat fromValue, CGFloat toValue, CGFloat lambda)
     NSArray *characterLocations = self.characterLocations;
     // From focusWindowStart decide which glyphs to draw and glyph color.
     NSInteger startCharacterDiscreteIndex = floor(self.focusWindowStart / self.fontSize);
+    startCharacterDiscreteIndex = fmax(startCharacterDiscreteIndex, 0.0);
     NSInteger endCharacterDiscreteIndex = floor((self.focusWindowStart + self.focusHeight) / self.fontSize);
+    endCharacterDiscreteIndex = fmin(endCharacterDiscreteIndex, [characterLocations count] - 1);
     CGFloat finalRed, finalGreen, finalBlue, finalAlpha;
     [self.color getRed:&finalRed green:&finalGreen blue:&finalBlue alpha:&finalAlpha];
 
