@@ -140,7 +140,7 @@ static CGFloat MSSBlendValue(CGFloat fromValue, CGFloat toValue, CGFloat lambda)
     CFArrayRef runArray = CTLineGetGlyphRuns(self.line);
     NSArray *characterLocations = self.characterLocations;
     // From focusWindowStart decide which glyphs to draw and glyph color.
-    NSInteger startCharacterDiscreteIndex = floor(self.focusWindowStart / self.fontSize);
+    NSInteger startCharacterDiscreteIndex = ceil(self.focusWindowStart / self.fontSize);
     startCharacterDiscreteIndex = fmax(startCharacterDiscreteIndex, 0.0);
     NSInteger endCharacterDiscreteIndex = floor((self.focusWindowStart + self.focusHeight) / self.fontSize);
     endCharacterDiscreteIndex = fmin(endCharacterDiscreteIndex, [characterLocations count] - 1);
@@ -156,6 +156,7 @@ static CGFloat MSSBlendValue(CGFloat fromValue, CGFloat toValue, CGFloat lambda)
         CGFloat characterContinuousIndex = i * self.fontSize;
         // focusLambda takes value in a range [0.0, 1.0] and describes gradient measure.
         CGFloat focusLambda = (characterContinuousIndex - self.focusWindowStart) / self.focusHeight;
+        NSAssert(0.0 <= focusLambda && focusLambda <= 1.0, @"Incorrect focusLambda");
         CGContextSetRGBFillColor(context,
             MSSBlendValue(0.0, finalRed, focusLambda),
             MSSBlendValue(0.0, finalGreen, focusLambda),
