@@ -144,8 +144,15 @@ static CGFloat MSSBlendValue(CGFloat fromValue, CGFloat toValue, CGFloat lambda)
     startCharacterDiscreteIndex = fmax(startCharacterDiscreteIndex, 0.0);
     NSInteger endCharacterDiscreteIndex = floor((self.focusWindowStart + self.focusHeight) / self.fontSize);
     endCharacterDiscreteIndex = fmin(endCharacterDiscreteIndex, [characterLocations count] - 1);
+    // Colors.
+    CGFloat colorRed, colorGreen, colorBlue, colorAlpha;
+    CGFloat hilightRed, hilightGreen, hilightBlue, hilightAlpha;
+    [self.color getRed:&colorRed green:&colorGreen blue:&colorBlue alpha:&colorAlpha];
+    [self.hilightColor getRed:&hilightRed green:&hilightGreen blue:&hilightBlue alpha:&hilightAlpha];
+    CGFloat initialRed, initialGreen, initialBlue, initialAlpha;
     CGFloat finalRed, finalGreen, finalBlue, finalAlpha;
-    [self.color getRed:&finalRed green:&finalGreen blue:&finalBlue alpha:&finalAlpha];
+    initialRed = initialGreen = initialBlue = initialAlpha = 0.0;
+    finalRed = finalGreen = finalBlue = finalAlpha = 0.0;
 
     CGContextSaveGState(context);
     CGContextSetTextMatrix(context, CGAffineTransformIdentity);
@@ -154,14 +161,46 @@ static CGFloat MSSBlendValue(CGFloat fromValue, CGFloat toValue, CGFloat lambda)
     for (NSInteger i = startCharacterDiscreteIndex; i <= endCharacterDiscreteIndex; i++)
     {
         CGFloat characterContinuousIndex = i * self.fontSize;
-        // focusLambda takes value in a range [0.0, 1.0] and describes gradient measure.
+        // focusLambda takes value in a range [0.0, 1.0] and is a normalized
+        // coordinate in sliding focus window.
         CGFloat focusLambda = (characterContinuousIndex - self.focusWindowStart) / self.focusHeight;
         NSAssert(0.0 <= focusLambda && focusLambda <= 1.0, @"Incorrect focusLambda");
-        CGContextSetRGBFillColor(context,
-            MSSBlendValue(0.0, finalRed, focusLambda),
-            MSSBlendValue(0.0, finalGreen, focusLambda),
-            MSSBlendValue(0.0, finalBlue, focusLambda),
-            MSSBlendValue(0.0, finalAlpha, focusLambda));
+        if (0.6 <= focusLambda && focusLambda <= 0.9)
+        {
+            // Single color.
+            CGContextSetRGBFillColor(context, colorRed, colorGreen, colorBlue, colorAlpha);
+        }
+        else
+        {
+            // Gradient.
+            CGFloat gradientLambda = 0.0;
+            if (focusLambda < 0.6)
+            {
+                initialRed = initialGreen = initialBlue = initialAlpha = 0.0;
+                finalRed = colorRed;
+                finalGreen = colorGreen;
+                finalBlue = colorBlue;
+                finalAlpha = colorAlpha;
+                gradientLambda = (focusLambda - 0.0) / (0.6 - 0.0);
+            }
+            else
+            {
+                initialRed = colorRed;
+                initialGreen = colorGreen;
+                initialBlue = colorBlue;
+                initialAlpha = colorAlpha;
+                finalRed = hilightRed;
+                finalGreen = hilightGreen;
+                finalBlue = hilightBlue;
+                finalAlpha = hilightAlpha;
+                gradientLambda = (focusLambda - 0.9) / (1.0 - 0.0);
+            }
+            CGContextSetRGBFillColor(context,
+                MSSBlendValue(initialRed, finalRed, gradientLambda),
+                MSSBlendValue(initialGreen, finalGreen, gradientLambda),
+                MSSBlendValue(initialBlue, finalBlue, gradientLambda),
+                MSSBlendValue(initialAlpha, finalAlpha, gradientLambda));
+        }
         MSSGlyphLineLocation *characterLocation = characterLocations[i];
         CTRunRef run = (CTRunRef)CFArrayGetValueAtIndex(runArray, characterLocation.runIndex);
         CTRunDraw(run, context, CFRangeMake(characterLocation.runGlyphIndex, 1));
