@@ -28,7 +28,7 @@
 
         self.layer.backgroundColor = [[NSColor blackColor] CGColor];
 
-        self.animationTimer = [NSTimer scheduledTimerWithTimeInterval:(1.0) target:self selector:@selector(animateLines:) userInfo:nil repeats:YES];
+        self.animationTimer = [NSTimer scheduledTimerWithTimeInterval:(1.0 / 30) target:self selector:@selector(animateLines:) userInfo:nil repeats:YES];
     }
     return self;
 }

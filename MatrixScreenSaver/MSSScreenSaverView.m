@@ -25,7 +25,7 @@
         [self.linesController setupViewForDisplayingLines:self];
         self.layer.backgroundColor = [[NSColor blackColor] CGColor];
 
-        [self setAnimationTimeInterval:1.0];
+        [self setAnimationTimeInterval:(1.0 / 30)];
     }
     return self;
 }
