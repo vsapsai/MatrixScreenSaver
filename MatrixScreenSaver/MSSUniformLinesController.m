@@ -7,7 +7,7 @@
 //
 
 #import "MSSUniformLinesController.h"
-#import "MSSRunningFocusLine.h"
+#import "MSSRunningDiscreteFocusLine.h"
 #import <ScreenSaver/ScreenSaverView.h>
 
 // One of the variants:
@@ -89,7 +89,7 @@ static const CGFloat kLinesPercentage = 0.9;
 
     NSString *string = [self randomStringOfLength:self.lineLength fromCharacters:sAllowedCharacters];
     CGFloat focusHeight = kMinCharacterHeight * SSRandomIntBetween(5, (int)self.lineLength);
-    id<MSSRunningLine> line = [[MSSRunningFocusLine alloc] initWithString:string fontSize:kFontSize focusHeight:focusHeight color:sColor hilightColor:sHilightColor backgroundColor:[NSColor blackColor]];
+    id<MSSRunningLine> line = [[MSSRunningDiscreteFocusLine alloc] initWithString:string fontSize:kFontSize focusHeight:focusHeight color:sColor hilightColor:sHilightColor backgroundColor:[NSColor blackColor]];
     line.speed = SSRandomFloatBetween(50.0, 80.0);
     return line;
 }
