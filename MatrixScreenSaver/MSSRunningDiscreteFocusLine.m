@@ -14,7 +14,7 @@
 static CGFloat MSSBlendValue(CGFloat fromValue, CGFloat toValue, CGFloat lambda);
 static CGFloat MSSValueNormalizedToRange(CGFloat value, CGFloat lowerBound, CGFloat upperBound);
 
-static const CGFloat kHilightToUsualColorThreshold = 0.7;
+static const CGFloat kHilightToUsualColorThreshold = 0.75;
 
 @interface MSSRunningDiscreteFocusLine()
 @property (copy, nonatomic) NSString *string;
