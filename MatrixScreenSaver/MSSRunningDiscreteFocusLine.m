@@ -141,9 +141,7 @@ static CGFloat MSSBlendValue(CGFloat fromValue, CGFloat toValue, CGFloat lambda)
     NSArray *characterLocations = self.characterLocations;
     // From focusWindowStart decide which glyphs to draw and glyph color.
     NSInteger startCharacterDiscreteIndex = ceil(self.focusWindowStart / self.fontSize);
-    startCharacterDiscreteIndex = fmax(startCharacterDiscreteIndex, 0.0);
     NSInteger endCharacterDiscreteIndex = floor((self.focusWindowStart + self.focusHeight) / self.fontSize);
-    endCharacterDiscreteIndex = fmin(endCharacterDiscreteIndex, [characterLocations count] - 1);
     // Colors.
     CGFloat colorRed, colorGreen, colorBlue, colorAlpha;
     CGFloat hilightRed, hilightGreen, hilightBlue, hilightAlpha;
@@ -158,7 +156,7 @@ static CGFloat MSSBlendValue(CGFloat fromValue, CGFloat toValue, CGFloat lambda)
     CGContextSetTextMatrix(context, CGAffineTransformIdentity);
     CGFloat layerHeight = layer.bounds.size.height;
     CGContextSetTextPosition(context, 10.0, layerHeight);
-    for (NSInteger i = startCharacterDiscreteIndex; i <= endCharacterDiscreteIndex; i++)
+    for (NSInteger i = fmax(startCharacterDiscreteIndex, 0), lastIndex = fmin(endCharacterDiscreteIndex, [characterLocations count] - 1); i <= lastIndex; i++)
     {
         CGFloat characterContinuousIndex = i * self.fontSize;
         // focusLambda takes value in a range [0.0, 1.0] and is a normalized
