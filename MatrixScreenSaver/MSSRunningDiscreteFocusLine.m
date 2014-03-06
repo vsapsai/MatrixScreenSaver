@@ -12,6 +12,9 @@
 #import "MSSGlyphLineLocation.h"
 
 static CGFloat MSSBlendValue(CGFloat fromValue, CGFloat toValue, CGFloat lambda);
+static CGFloat MSSValueNormalizedToRange(CGFloat value, CGFloat lowerBound, CGFloat upperBound);
+
+static const CGFloat kHilightToUsualColorThreshold = 0.7;
 
 @interface MSSRunningDiscreteFocusLine()
 @property (copy, nonatomic) NSString *string;
@@ -168,23 +171,18 @@ static CGFloat MSSBlendValue(CGFloat fromValue, CGFloat toValue, CGFloat lambda)
             // Single color.
             CGContextSetRGBFillColor(context, hilightRed, hilightGreen, hilightBlue, hilightAlpha);
         }
-        else if (0.6 <= focusLambda && focusLambda <= 0.9)
-        {
-            // Single color.
-            CGContextSetRGBFillColor(context, colorRed, colorGreen, colorBlue, colorAlpha);
-        }
         else
         {
             // Gradient.
             CGFloat gradientLambda = 0.0;
-            if (focusLambda < 0.6)
+            if (focusLambda < kHilightToUsualColorThreshold)
             {
                 initialRed = initialGreen = initialBlue = initialAlpha = 0.0;
                 finalRed = colorRed;
                 finalGreen = colorGreen;
                 finalBlue = colorBlue;
                 finalAlpha = colorAlpha;
-                gradientLambda = (focusLambda - 0.0) / (0.6 - 0.0);
+                gradientLambda = MSSValueNormalizedToRange(focusLambda, 0.0, kHilightToUsualColorThreshold);
             }
             else
             {
@@ -196,7 +194,7 @@ static CGFloat MSSBlendValue(CGFloat fromValue, CGFloat toValue, CGFloat lambda)
                 finalGreen = hilightGreen;
                 finalBlue = hilightBlue;
                 finalAlpha = hilightAlpha;
-                gradientLambda = (focusLambda - 0.9) / (1.0 - 0.9);
+                gradientLambda = MSSValueNormalizedToRange(focusLambda, kHilightToUsualColorThreshold, 1.0);
             }
             CGContextSetRGBFillColor(context,
                 MSSBlendValue(initialRed, finalRed, gradientLambda),
@@ -251,4 +249,11 @@ static CGFloat MSSBlendValue(CGFloat fromValue, CGFloat toValue, CGFloat lambda)
 static CGFloat MSSBlendValue(CGFloat fromValue, CGFloat toValue, CGFloat lambda)
 {
     return lambda * toValue + (1.0 - lambda) * fromValue;
+}
+
+static CGFloat MSSValueNormalizedToRange(CGFloat value, CGFloat lowerBound, CGFloat upperBound)
+{
+    NSCAssert(lowerBound < upperBound, @"Incorrect bounds");
+    NSCAssert(lowerBound <= value && value <= upperBound, @"Value is not within bounds");
+    return (value - lowerBound) / (upperBound - lowerBound);
 }
