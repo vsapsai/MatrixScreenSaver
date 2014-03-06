@@ -196,7 +196,7 @@ static CGFloat MSSBlendValue(CGFloat fromValue, CGFloat toValue, CGFloat lambda)
                 finalGreen = hilightGreen;
                 finalBlue = hilightBlue;
                 finalAlpha = hilightAlpha;
-                gradientLambda = (focusLambda - 0.9) / (1.0 - 0.0);
+                gradientLambda = (focusLambda - 0.9) / (1.0 - 0.9);
             }
             CGContextSetRGBFillColor(context,
                 MSSBlendValue(initialRed, finalRed, gradientLambda),
