@@ -163,7 +163,12 @@ static CGFloat MSSBlendValue(CGFloat fromValue, CGFloat toValue, CGFloat lambda)
         // coordinate in sliding focus window.
         CGFloat focusLambda = (characterContinuousIndex - self.focusWindowStart) / self.focusHeight;
         NSAssert(0.0 <= focusLambda && focusLambda <= 1.0, @"Incorrect focusLambda");
-        if (0.6 <= focusLambda && focusLambda <= 0.9)
+        if (i == endCharacterDiscreteIndex)
+        {
+            // Single color.
+            CGContextSetRGBFillColor(context, hilightRed, hilightGreen, hilightBlue, hilightAlpha);
+        }
+        else if (0.6 <= focusLambda && focusLambda <= 0.9)
         {
             // Single color.
             CGContextSetRGBFillColor(context, colorRed, colorGreen, colorBlue, colorAlpha);
