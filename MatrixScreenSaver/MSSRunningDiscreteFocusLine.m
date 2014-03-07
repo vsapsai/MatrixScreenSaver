@@ -58,6 +58,7 @@ static const CGFloat kHilightToUsualColorThreshold = 0.75;
         NSAssert(NULL != line, @"Failed to create CTLineRef");
         NSAssert(CTLineGetGlyphCount(line) == string.length, @"Assume character-to-glyph 1-to-1 correspondence");
         self.line = line;
+        CFRelease(line);
         // Here we make an assumption that characters and glyphs are the same.
         self.characterLocations = [self _glyphLocationsForLine:line];
     }
@@ -66,11 +67,22 @@ static const CGFloat kHilightToUsualColorThreshold = 0.75;
 
 - (void)dealloc
 {
-    CTLineRef line = self.line;
-    if (NULL != line)
+    self.line = NULL;
+}
+
+- (void)setLine:(CTLineRef)line
+{
+    if (line != _line)
     {
-        CFRelease(line);
-        self.line = NULL;
+        if (NULL != _line)
+        {
+            CFRelease(_line);
+        }
+        if (NULL != line)
+        {
+            CFRetain(line);
+        }
+        _line = line;
     }
 }
 
